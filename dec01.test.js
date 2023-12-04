@@ -1,10 +1,19 @@
-const { getCalibrationValueOf } = require('./dec01')
+const { getCalibrationValueOf, getSumOfCalibrationValues, isNumber } = require('./dec01')
 
-// 2 numbers
-// 1 number
-// 0 numbers
-// adjacent numbers
-// 3+ numbers
+describe('testing isNumber', () => {
+    test('a number', () => {
+        expect(isNumber('3')).toBe(true)
+    })
+
+    test('a letter', () => {
+        expect(isNumber('a')).toBe(false)
+    })
+
+    test('whitespace', () => {
+        expect(isNumber(' ')).toBe(false)
+    })
+})
+
 describe('testing getValueOf', () => {
     test('string has 2 numbers', () => {
         expect(getCalibrationValueOf('1abc2')).toEqual(12)
@@ -25,5 +34,28 @@ describe('testing getValueOf', () => {
 
     test('string has adjacent numbers', () => {
         expect(getCalibrationValueOf('gnaWSd82afjmas10famsdf')).toEqual(80)
+    })
+
+    test('string has leading whitespace', () => {
+        expect(getCalibrationValueOf('        pqr3stu8vwx')).toEqual(38)
+    })
+
+    test('string has trailing whitespace', () => {
+        expect(getCalibrationValueOf('pqr3stu8vwx        ')).toEqual(38)
+    })
+})
+
+describe('testing getSumOfCalibrationValues', () => {
+    test('the provided example', () => {
+        const exampleDocument = 
+        `1abc2
+        pqr3stu8vwx
+        a1b2c3d4e5f
+        treb7uchet`
+        expect(getSumOfCalibrationValues(exampleDocument)).toEqual(142)
+    })
+
+    test('empty document', () => {
+        expect(getSumOfCalibrationValues('')).toEqual(0)
     })
 })

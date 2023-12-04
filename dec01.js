@@ -3,7 +3,16 @@ Trebuchet
 */
 
 function getSumOfCalibrationValues(document) {
+    const lines = document.split('\n')
+    console.log(lines)
+    let sum = 0
+    for (line of lines) {
+        calVal = getCalibrationValueOf(line)
+        console.log(`${line}: ${calVal}`)
+        sum += calVal
+    }
     
+    return sum
 }
 
 function getCalibrationValueOf(line) {
@@ -13,7 +22,7 @@ function getCalibrationValueOf(line) {
     let leftmostIndex = 0
     while (leftmostIndex < line.length) {
         const current = line.charAt(leftmostIndex)
-        if (!isNaN(current)) {
+        if (isNumber(current)) {
             numString += current
             break
         }
@@ -24,7 +33,7 @@ function getCalibrationValueOf(line) {
     let rightmostIndex = line.length - 1
     while (rightmostIndex >= leftmostIndex) {
         const current = line.charAt(rightmostIndex)
-        if (!isNaN(current)) {
+        if (isNumber(current)) {
             numString += current
             break
         }
@@ -37,4 +46,8 @@ function getCalibrationValueOf(line) {
     return Number(numString)
 }
 
-module.exports = { getCalibrationValueOf }
+function isNumber(character) {
+    return /[0-9]/.test(character)
+}
+
+module.exports = { getCalibrationValueOf, getSumOfCalibrationValues, isNumber }
