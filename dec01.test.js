@@ -1,16 +1,34 @@
-const { getCalibrationValueOf, getSumOfCalibrationValues, isNumber } = require('./dec01')
+const { getCalibrationValueOf, getSumOfCalibrationValues, isDigit, englishDigitOf } = require('./dec01')
 
-describe('testing isNumber', () => {
+describe('testing isDigit', () => {
     test('a number', () => {
-        expect(isNumber('3')).toBe(true)
+        expect(isDigit('3')).toBe(true)
     })
 
     test('a letter', () => {
-        expect(isNumber('a')).toBe(false)
+        expect(isDigit('a')).toBe(false)
     })
 
     test('whitespace', () => {
-        expect(isNumber(' ')).toBe(false)
+        expect(isDigit(' ')).toBe(false)
+    })
+})
+
+describe('testing englishDigitOf', () => {
+    test('four', () => {
+        expect(englishDigitOf('four')).toEqual('four')
+    })
+
+    test('sixpth', () => {
+        expect(englishDigitOf('sixpth')).toEqual('six')
+    })
+
+    test('tone', () => {
+        expect(() => {return englishDigitOf('tone')}).toThrow(Error)
+    })
+
+    test('seventwo', () => {
+        expect(englishDigitOf('seventwo')).toEqual('seven')
     })
 })
 
@@ -49,6 +67,34 @@ describe('testing getCalibrationValueOf, taking into account digits in their eng
     test('two1nine', () => {
         expect(getCalibrationValueOf('two1nine')).toEqual(29)
     })
+
+    test('eightwothree', () => {
+        expect(getCalibrationValueOf('eightwothree')).toEqual(83)
+    })
+
+    test('abcone2threexyz', () => {
+        expect(getCalibrationValueOf('abcone2threexyz')).toEqual(13)
+    })
+
+    test('xtwone3four', () => {
+        expect(getCalibrationValueOf('xtwone3four')).toEqual(24)
+    })
+
+    test('4nineeightseven2', () => {
+        expect(getCalibrationValueOf('4nineeightseven2')).toEqual(42)
+    })
+
+    test('zoneight234', () => {
+        expect(getCalibrationValueOf('zoneight234')).toEqual(14)
+    })
+
+    test('7pqrstsixteen', () => {
+        expect(getCalibrationValueOf('7pqrstsixteen')).toEqual(76)
+    })
+
+    test('twno3fourty', () => {
+        expect(getCalibrationValueOf('twno3fourty')).toEqual(34)
+    })
 })
 
 describe('testing getSumOfCalibrationValues', () => {
@@ -63,6 +109,7 @@ describe('testing getSumOfCalibrationValues', () => {
 
     test('empty document', () => {
         expect(getSumOfCalibrationValues('')).toEqual(0)
+        console.log('empty document'.substring(3, 104))
     })
 
     test('the provided example, part 2', () => {
@@ -1080,10 +1127,6 @@ eightfblzpmhs4
 fbbdeightzzsdffh8jbjzxkclj
 3nine6five1`
 
-test('PART ONE', () => {
-    console.log(getSumOfCalibrationValues(INPUT_TEXT))
-})
-
-test('PART TWO', () => {
-
+test('ANSWER', () => {
+    console.log(`Answer is ${getSumOfCalibrationValues(INPUT_TEXT)}`)
 })

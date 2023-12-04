@@ -2,9 +2,18 @@
 Trebuchet
 */
 
-const DIGITS = [
-    'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'zero'
-]
+const DIGITS = {
+    'one': 1,
+    'two': 2,
+    'three': 3,
+    'four': 4,
+    'five': 5,
+    'six': 6,
+    'seven': 7,
+    'eight': 8,
+    'nine': 9,
+    'zero': 0
+}
 
 function getSumOfCalibrationValues(document) {
     const lines = document.split('\n')
@@ -26,9 +35,17 @@ function getCalibrationValueOf(line) {
     let leftmostIndex = 0
     while (leftmostIndex < line.length) {
         const current = line.charAt(leftmostIndex)
-        if (isNumber(current)) {
+        if (isDigit(current)) {
             numString += current
             break
+        }
+        try {
+            const digit = englishDigitOf(line.substring(leftmostIndex))
+            numString += DIGITS[digit]
+            leftmostIndex += digit.length
+            break
+        } catch (error) {
+            // do nothing and move on
         }
         leftmostIndex++
     }
@@ -37,9 +54,16 @@ function getCalibrationValueOf(line) {
     let rightmostIndex = line.length - 1
     while (rightmostIndex >= leftmostIndex) {
         const current = line.charAt(rightmostIndex)
-        if (isNumber(current)) {
+        if (isDigit(current)) {
             numString += current
             break
+        }
+        try {
+            const digit = englishDigitOf(line.substring(rightmostIndex))
+            numString += DIGITS[digit]
+            break
+        } catch (error) {
+            // do nothing and move on
         }
         rightmostIndex--
     }
@@ -50,8 +74,24 @@ function getCalibrationValueOf(line) {
     return Number(numString)
 }
 
-function isNumber(character) {
+function isDigit(character) {
     return /[0-9]/.test(character)
 }
 
-module.exports = { getCalibrationValueOf, getSumOfCalibrationValues, isNumber }
+function englishDigitOf(string) {
+    for (word of Object.keys(DIGITS)) {
+        const current = string.substring(0, word.length)
+        if (current === word) {
+            return word
+        }
+    }
+    throw Error('No english digit substring starts here')
+}
+
+// TODO: more efficient solution
+    /*
+    if character in ['o', 't', 'f', 's', 'e', 'n', 'z']:
+
+    */
+
+module.exports = { getCalibrationValueOf, getSumOfCalibrationValues, isDigit, englishDigitOf }
