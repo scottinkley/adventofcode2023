@@ -1,4 +1,4 @@
-const { getValueOf } = require('./dec01')
+const { getCalibrationValueOf } = require('./dec01')
 
 // 2 numbers
 // 1 number
@@ -7,23 +7,23 @@ const { getValueOf } = require('./dec01')
 // 3+ numbers
 describe('testing getValueOf', () => {
     test('string has 2 numbers', () => {
-        expect(getValueOf('1abc2')).toEqual(12)
-        expect(getValueOf('pqr3stu8vwx')).toEqual(38)
+        expect(getCalibrationValueOf('1abc2')).toEqual(12)
+        expect(getCalibrationValueOf('pqr3stu8vwx')).toEqual(38)
     })
 
     test('string has 1 number', () => {
-        expect(getValueOf('treb7uchet')).toEqual(77)
+        expect(getCalibrationValueOf('treb7uchet')).toEqual(77)
     })
 
     test('string has 0 numbers', () => {
-        expect(getValueOf('noaiunasflgqkljhdnasf')).toEqual(0)
+        expect(getCalibrationValueOf('noaiunasflgqkljhdnasf')).toEqual(0)
     })
 
     test('string has 3+ numbers', () => {
-        expect(getValueOf('a1b2c3d4e5f')).toEqual(15)
+        expect(getCalibrationValueOf('a1b2c3d4e5f')).toEqual(15)
     })
 
     test('string has adjacent numbers', () => {
-        expect(getValueOf('gnaWSd82afjmas10famsdf')).toEqual(80)
+        expect(getCalibrationValueOf('gnaWSd82afjmas10famsdf')).toEqual(80)
     })
 })
