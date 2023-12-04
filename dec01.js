@@ -2,6 +2,10 @@
 Trebuchet
 */
 
+const DIGITS = [
+    'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'zero'
+]
+
 function getSumOfCalibrationValues(document) {
     const lines = document.split('\n')
     console.log(lines)
