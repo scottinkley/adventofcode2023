@@ -17,11 +17,9 @@ const DIGITS = {
 
 function getSumOfCalibrationValues(document) {
     const lines = document.split('\n')
-    console.log(lines)
     let sum = 0
     for (line of lines) {
         calVal = getCalibrationValueOf(line)
-        console.log(`${line}: ${calVal}`)
         sum += calVal
     }
     
@@ -87,11 +85,5 @@ function englishDigitOf(string) {
     }
     throw Error('No english digit substring starts here')
 }
-
-// TODO: more efficient solution
-    /*
-    if character in ['o', 't', 'f', 's', 'e', 'n', 'z']:
-
-    */
 
 module.exports = { getCalibrationValueOf, getSumOfCalibrationValues, isDigit, englishDigitOf }

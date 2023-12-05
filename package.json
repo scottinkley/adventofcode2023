@@ -5,7 +5,8 @@
   "main": "dec01.js",
   "scripts": {
     "test": "jest",
-    "watch": "jest --watch"
+    "watch": "jest --watch",
+    "coverage": "jest --coverage"
   },
   "author": "",
   "license": "ISC"
