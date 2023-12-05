@@ -16,34 +16,39 @@ const DIGITS = {
 }
 
 function getSumOfCalibrationValues(document) {
-    const lines = document.split('\n')
     let sum = 0
+    const lines = document.split('\n')
     for (line of lines) {
         calVal = getCalibrationValueOf(line)
         sum += calVal
     }
-    
     return sum
 }
 
 function getCalibrationValueOf(line) {
+    function foundNumberAtIndex(line, index) {
+        const current = line.charAt(index)
+        if (isDigit(current)) {
+            numString += current
+            return true
+        }
+        try {
+            const digit = englishDigitOf(line.substring(index))
+            numString += DIGITS[digit]
+            index += digit.length
+            return true
+        } catch (error) {
+            return false
+        }
+    }
+
     let numString = ''
 
     // get leftmost digit
     let leftmostIndex = 0
     while (leftmostIndex < line.length) {
-        const current = line.charAt(leftmostIndex)
-        if (isDigit(current)) {
-            numString += current
+        if (foundNumberAtIndex(line, leftmostIndex)) {
             break
-        }
-        try {
-            const digit = englishDigitOf(line.substring(leftmostIndex))
-            numString += DIGITS[digit]
-            leftmostIndex += digit.length
-            break
-        } catch (error) {
-            // do nothing and move on
         }
         leftmostIndex++
     }
@@ -51,24 +56,12 @@ function getCalibrationValueOf(line) {
     // get rightmost digit
     let rightmostIndex = line.length - 1
     while (rightmostIndex >= leftmostIndex) {
-        const current = line.charAt(rightmostIndex)
-        if (isDigit(current)) {
-            numString += current
+        if (foundNumberAtIndex(line, rightmostIndex)) {
             break
-        }
-        try {
-            const digit = englishDigitOf(line.substring(rightmostIndex))
-            numString += DIGITS[digit]
-            break
-        } catch (error) {
-            // do nothing and move on
         }
         rightmostIndex--
     }
 
-    if (numString === '') {
-        return 0;
-    }
     return Number(numString)
 }
 
