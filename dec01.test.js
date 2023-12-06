@@ -109,7 +109,6 @@ describe('testing getSumOfCalibrationValues', () => {
 
     test('empty document', () => {
         expect(getSumOfCalibrationValues('')).toEqual(0)
-        console.log('empty document'.substring(3, 104))
     })
 
     test('the provided example, part 2', () => {

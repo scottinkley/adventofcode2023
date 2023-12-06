@@ -11,7 +11,6 @@ function sumOfPossibleGames(games) {
         const gameNumber = Number(gameInfo[0].split(' ')[1])
         const rounds = gameInfo[1]
         if (gameIsPossible(rounds)) {
-            console.log(`This game is possible: ${game}`)
             sum += gameNumber
         }
     }
@@ -48,7 +47,6 @@ function powerOfGame(game) {
         }
     }
 
-    console.log(`blue: ${MAX_BLUE}, red: ${MAX_RED}, green: ${MAX_GREEN}`)
     return MAX_BLUE * MAX_RED * MAX_GREEN
 }
 
