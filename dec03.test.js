@@ -5,7 +5,7 @@ Notes how to solve this:
         - determine if there is a symbol adjacent to any part of the number
 */
 
-const { getSumOfPartNumbers, getLastDigitPosition } = require('./dec03')
+const { getSumOfPartNumbers, getSumOfGearRatios, getLastDigitPosition } = require('./dec03')
 
 const EXAMPLE =
 `467..114..
@@ -22,6 +22,12 @@ const EXAMPLE =
 describe('getSumOfPartNumbers', () => {
     test('Provided example', () => {
         expect(getSumOfPartNumbers(EXAMPLE)).toEqual(4361)
+    })
+})
+
+describe('getSumOfGearRatios', () => {
+    test('Provided example', () => {
+        expect(getSumOfGearRatios(EXAMPLE)).toEqual(467835)
     })
 })
 
@@ -188,4 +194,8 @@ const FULL_INPUT =
 
 test('part 1 solution', () => {
     console.log(`Part 1 solution: ${getSumOfPartNumbers(FULL_INPUT)}`)
+})
+
+test('part 2 solution', () => {
+    console.log(`Part 2 solution: ${getSumOfGearRatios(FULL_INPUT)}`)
 })
