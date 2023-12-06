@@ -1,4 +1,4 @@
-const { getSumOfCardScores, getScoreOf } = require('./dec04')
+const { getSumOfCardScores, getScoreOf, getNumberOfScratchcards} = require('./dec04')
 
 const CARD_1 = 'Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53'
 const CARD_2 = 'Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19'
@@ -14,6 +14,12 @@ ${CARD_3}
 ${CARD_4}
 ${CARD_5}
 ${CARD_6}`
+
+describe('getNumberOfScratchcards', () => {
+    test('example input', () => {
+        expect(getNumberOfScratchcards(EXAMPLE)).toEqual(30)
+    })
+})
 
 describe('getSumOfCardScores', () => {
     test('example input', () => {
@@ -265,5 +271,5 @@ Card 214: 11 74 92 36 26 68 78 73  5 80 | 67 15  3 22 46 41 87 64 53 89 52 85 99
 
 test('solutions', () => {
     console.log('part 1 answer: ' + getSumOfCardScores(FULL_INPUT))
-    console.log('part 2 answer: ')
+    console.log('part 2 answer: ' + getNumberOfScratchcards(FULL_INPUT))
 })
