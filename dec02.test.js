@@ -1,35 +1,48 @@
-const { sumOfPossibleGames, gameIsPossible, roundIsPossible } = require('./dec02')
+const { sumOfPossibleGames, sumOfPowers, powerOfGame, gameIsPossible, roundIsPossible } = require('./dec02')
+
+const GAME_1 = '3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green'
+const GAME_2 = '1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue'
+const GAME_3 = '8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red'
+const GAME_4 = '1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red'
+const GAME_5 = '6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green'
+
+const EXAMPLE = `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
+Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
+Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
+Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
+Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green`
 
 describe('sumOfPossibleGames', () => {
     test('provided example', () => {
-        const GAMES = `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
-        Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
-        Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
-        Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
-        Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green`
-        expect(sumOfPossibleGames(GAMES)).toEqual(8)
+        expect(sumOfPossibleGames(EXAMPLE)).toEqual(8)
+    })
+})
+
+describe('sumOfPowers', () => {
+    test('provided example', () => {
+        expect(sumOfPowers(EXAMPLE)).toEqual(2286)
     })
 })
 
 describe('gameIsPossible', () => {
-    test('3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green', () => {
-        expect(gameIsPossible('3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green')).toBe(true)
+    test(GAME_1, () => {
+        expect(gameIsPossible(GAME_1)).toBe(true)
     })
 
-    test('1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue', () => {
-        expect(gameIsPossible('1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue')).toBe(true)
+    test(GAME_2, () => {
+        expect(gameIsPossible(GAME_2)).toBe(true)
     })
 
-    test('8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red', () => {
-        expect(gameIsPossible('8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red')).toBe(false)
+    test(GAME_3, () => {
+        expect(gameIsPossible(GAME_3)).toBe(false)
     })
 
-    test('1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red', () => {
-        expect(gameIsPossible('1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red')).toBe(false)
+    test(GAME_4, () => {
+        expect(gameIsPossible(GAME_4)).toBe(false)
     })
 
-    test('6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green', () => {
-        expect(gameIsPossible('6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green')).toBe(true)
+    test(GAME_5, () => {
+        expect(gameIsPossible(GAME_5)).toBe(true)
     })
 })
 
@@ -51,8 +64,34 @@ describe('roundIsPossible', () => {
     })
 })
 
-test('solution', () => {
-    console.log(`Solution: ${sumOfPossibleGames(TEST_INPUT)}`)
+describe('powerOfGame', () => {
+    test(GAME_1, () => {
+        expect(powerOfGame(GAME_1)).toEqual(48)
+    })
+
+    test(GAME_2, () => {
+        expect(powerOfGame(GAME_2)).toEqual(12)
+    })
+
+    test(GAME_3, () => {
+        expect(powerOfGame(GAME_3)).toEqual(1560)
+    })
+
+    test(GAME_4, () => {
+        expect(powerOfGame(GAME_4)).toEqual(630)
+    })
+
+    test(GAME_5, () => {
+        expect(powerOfGame(GAME_5)).toEqual(36)
+    })
+})
+
+test('solution, part 1', () => {
+    console.log(`Solution, part 1: ${sumOfPossibleGames(TEST_INPUT)}`)
+})
+
+test('solution, part 2', () => {
+    console.log(`Solution, part 2: ${sumOfPowers(TEST_INPUT)}`)
 })
 
 const TEST_INPUT = `
