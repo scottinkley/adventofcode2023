@@ -189,18 +189,3 @@ const FULL_INPUT =
 test('part 1 solution', () => {
     console.log(`Part 1 solution: ${getSumOfPartNumbers(FULL_INPUT)}`)
 })
-
-test('print each unique character', () => {
-    console.log(((FULL_INPUT || '').match(/\*|\%|\$|\@|\&|\+|\/|\#|\=|\-/g) || []).length)
-    const string = 'asdf'
-    console.log('negative index result: ' + string.charAt(-1))
-    const arr = [4, 5, 1]
-    console.log('negative array index result: ' + arr[-1])
-    let index = 0
-    const uniqueCharacters = new Set()
-    while (index < FULL_INPUT.length) {
-        uniqueCharacters.add(FULL_INPUT.charAt(index))
-        index++
-    }
-    console.log(uniqueCharacters)
-})

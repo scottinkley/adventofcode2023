@@ -10,49 +10,43 @@ function getSumOfPartNumbers(input) {
         let columnIndex = 0
         while (columnIndex < currentRow.length) {
             if (isDigit(currentRow.charAt(columnIndex))) {
-                let number
                 const firstDigitPosition = columnIndex
                 const lastDigitPosition = getLastDigitPosition(currentRow, columnIndex)
-                if (ROWS[rowIndex - 1] !== undefined) {
-                    const current = ROWS[rowIndex - 1]
-                    for (let c = firstDigitPosition - 1; c <= lastDigitPosition + 1; c++) {
-                        if (isSymbol(current.charAt(c))) {
-                            number = currentRow.substring(firstDigitPosition, lastDigitPosition + 1)
-                            break
-                        }
-                    }
-                    if (number > 0) {
-                        sum += Number(number)
-                        columnIndex = lastDigitPosition + 1
-                        continue
-                    }
-                }
-                if (isSymbol(currentRow.charAt(firstDigitPosition - 1)) ||
-                    isSymbol(currentRow.charAt(lastDigitPosition + 1))) {
-                    number = currentRow.substring(firstDigitPosition, lastDigitPosition + 1)
-                    sum += Number(number)
+                if (numberIsAdjacentToSymbol(ROWS, rowIndex, firstDigitPosition - 1, lastDigitPosition + 1)) {
+                    sum += Number(currentRow.substring(firstDigitPosition, lastDigitPosition + 1))
                     columnIndex = lastDigitPosition + 1
                     continue
                 }
-                if (ROWS[rowIndex + 1] !== undefined) {
-                    const current = ROWS[rowIndex + 1]
-                    for (let c = firstDigitPosition - 1; c <= lastDigitPosition + 1; c++) {
-                        if (isSymbol(current.charAt(c))) {
-                            number = currentRow.substring(firstDigitPosition, lastDigitPosition + 1)
-                            break
-                        }
-                    }
-                    if (number > 0) {
-                        sum += Number(number)
-                        columnIndex = lastDigitPosition + 1
-                        continue
-                    }
-                }
             }
-            columnIndex++ // may want this in an else
+            columnIndex++
         }
     }
     return sum
+}
+
+function numberIsAdjacentToSymbol(ROWS, rowIndex, leftmostIndex, rightmostIndex) {
+    function rowSegmentContainsSymbol(row) {
+        if (row !== undefined) {
+            for (let c = leftmostIndex; c <= rightmostIndex; c++) {
+                if (isSymbol(row.charAt(c))) {
+                   return true 
+                }
+            }
+        }
+        return false
+    }
+
+    if (rowSegmentContainsSymbol(ROWS[rowIndex - 1])) {
+        return true
+    }
+    if (isSymbol(ROWS[rowIndex].charAt(leftmostIndex)) ||
+        isSymbol(ROWS[rowIndex].charAt(rightmostIndex))) {
+        return true
+    }
+    if (rowSegmentContainsSymbol(ROWS[rowIndex + 1])) {
+        return true
+    }
+    return false
 }
 
 function getLastDigitPosition(row, index) {
