@@ -2,7 +2,7 @@
 test file
 */
 
-const { getLowestLocationFromSeedRanges, getSeedRanges, getMapping, getNumbers } = require('./dec05')
+const { getLowestLocationFromSeedRanges, transformRanges, getSeedRanges, getMapping, getNumbers } = require('./dec05')
 
 const EXAMPLE =
 `seeds: 79 14 55 13
@@ -294,6 +294,54 @@ humidity-to-location map:
 describe('getLowestLocationFromSeedRanges', () => {
     test('provided example', () => {
         expect(getLowestLocationFromSeedRanges(EXAMPLE)).toEqual(46)
+    })
+})
+
+describe('transformRanges', () => {
+    test('slices bottom of one', () => {
+        const mapping = { start: 46, end: 62, transform: -29 }
+        const ranges = {
+            before: new Set([
+                { start: 79, end: 92 },
+                { start: 55, end: 67 }
+            ]),
+            after: new Set()
+        }
+        const expectedRanges = {
+            before: new Set([
+                { start: 79, end: 92 },
+                { start: 63, end: 67 }
+            ]),
+            after: new Set([
+                { start: 26, end: 33 }
+            ])
+        }
+        expect(transformRanges(mapping, ranges)).toEqual(expectedRanges)
+    })
+
+    test('slices middle of one', () => {
+        const mapping = { start: 34, end: 40, transform: 15 }
+        const ranges = {
+            before: new Set([
+                { start: 77, end: 92 },
+                { start: 28, end: 47 }
+            ]),
+            after: new Set([
+                { start: 94, end: 97 }
+            ])
+        }
+        const expectedRanges = {
+            before: new Set([
+                { start: 77, end: 92 },
+                { start: 28, end: 33 },
+                { start: 41, end: 47 }
+            ]),
+            after: new Set([
+                { start: 94, end: 97 },
+                { start: 49, end: 55 }
+            ])
+        }
+        expect(transformRanges(mapping, ranges)).toEqual(expectedRanges)
     })
 })
 

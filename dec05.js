@@ -20,13 +20,43 @@ function getLocationRanges(seedRanges, rows) {
             index++
             while (index < rows.length && rows[index].length > 1) {
                 const mapping = getMapping(rows[index])
-                // perform the mapping
+                ranges = transformRanges(mapping, ranges)
                 index++
             }
         }
         index++
     }
+    for (range of ranges.before) {
+        ranges.after.add(range)
+    }
     return ranges.after
+}
+
+function transformRanges(mapping, ranges) {
+    for (range of ranges.before) {
+        const maxStart = Math.max(mapping.start, range.start)
+        const minEnd = Math.min(mapping.end, range.end)
+        if (maxStart - minEnd < 0) {
+            ranges.after.add({
+                start: maxStart + mapping.transform,
+                end: minEnd + mapping.transform
+            })
+            if (maxStart > range.start) {
+                ranges.before.add({
+                    start: range.start,
+                    end: maxStart - 1
+                })
+            }
+            if (minEnd < range.end) {
+                ranges.before.add({
+                    start: minEnd + 1,
+                    end: range.end
+                })
+            }
+            ranges.before.delete(range)
+        }
+    }
+    return ranges
 }
 
 function getSeedRanges(string) {
@@ -54,4 +84,4 @@ function getNumbers(string) {
     return string.trim().split(' ').map(str => Number(str))
 }
 
-module.exports = { getLowestLocationFromSeedRanges, getSeedRanges, getMapping, getNumbers }
+module.exports = { getLowestLocationFromSeedRanges, transformRanges, getSeedRanges, getMapping, getNumbers }
