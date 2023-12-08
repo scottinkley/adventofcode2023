@@ -1,4 +1,8 @@
-const { getLowestLocationOfSeeds, getNumbers } = require('./dec05')
+/*
+test file
+*/
+
+const {} = require('./')
 
 const EXAMPLE =
 `seeds: 79 14 55 13
@@ -287,23 +291,7 @@ humidity-to-location map:
 2263391124 3284903475 6540422
 900259193 1880133562 3909787`
 
-describe('getLowestLocationOfSeeds', () => {
-    test('provided example', () => {
-        expect(getLowestLocationOfSeeds(EXAMPLE)).toEqual(35)
-    })
-})
-
-describe('getNumbers', () => {
-    test('79 14 55 13', () => {
-        expect(getNumbers('79 14 55 13')).toEqual([79,14,55,13])
-    })
-
-    test('2093671499 2217398614 16037515', () => {
-        expect(getNumbers('2093671499 2217398614 16037515')).toEqual([2093671499,2217398614,16037515])
-    })
-})
-
 test('solutions', () => {
-    console.log('Part 1 answer: ' + getLowestLocationOfSeeds(FULL_INPUT))
+    console.log('Part 1 answer: ')
     console.log('Part 2 answer: ')
 })
