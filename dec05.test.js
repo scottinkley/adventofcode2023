@@ -2,7 +2,7 @@
 test file
 */
 
-const {} = require('./')
+const { getLowestLocationFromSeedRanges, getSeedRanges, getMapping, getNumbers } = require('./dec05')
 
 const EXAMPLE =
 `seeds: 79 14 55 13
@@ -291,7 +291,57 @@ humidity-to-location map:
 2263391124 3284903475 6540422
 900259193 1880133562 3909787`
 
-test('solutions', () => {
+describe('getLowestLocationFromSeedRanges', () => {
+    test('provided example', () => {
+        expect(getLowestLocationFromSeedRanges(EXAMPLE)).toEqual(46)
+    })
+})
+
+describe('getSeedRanges', () => {
+    test('79 14 55 13', () => {
+        expect(getSeedRanges('79 14 55 13')).toEqual(new Set([
+            { start: 79, end: 92 },
+            { start: 55, end: 67 }
+        ]))
+    })
+
+    test('full input seeds', () => {
+        const rangesString = '1263068588 44436703 1116624626 2393304 2098781025 128251971'
+        expect(getSeedRanges(rangesString)).toEqual(new Set([
+            { start: 1263068588, end: 1307505290 },
+            { start: 1116624626, end: 1119017929 },
+            { start: 2098781025, end: 2227032995 }
+        ]))
+    })
+})
+
+describe('getMapping', () => {
+    test('0 69 1', () => {
+        expect(getMapping('0 69 1')).toEqual({
+            start: 69, end: 69, transform: -69
+        })
+    })
+
+    test('1 0 69', () => {
+        expect(getMapping('1 0 69')).toEqual({
+            start: 0, end: 68, transform: 1
+        })
+    })
+
+    test('731512552 475754624 67823222', () => {
+        expect(getMapping('731512552 475754624 67823222')).toEqual({
+            start: 475754624, end: 543577845, transform: 255757928
+        })
+    })
+})
+
+describe('getNumbers', () => {
+    test('79 14 55 13', () => {
+        expect(getNumbers('79 14 55 13')).toEqual([79, 14, 55, 13])
+    })
+})
+
+test.skip('solutions', () => {
     console.log('Part 1 answer: ')
-    console.log('Part 2 answer: ')
+    console.log('Part 2 answer: ' + getLowestLocationFromSeedRanges(FULL_INPUT))
 })
