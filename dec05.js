@@ -6,30 +6,40 @@ function getLowestLocationFromSeedRanges(input) {
     const rows = input.trim().split('\n')
     const seedRanges = getSeedRanges(rows[0].trim().split(':')[1])
     const locationRanges = getLocationRanges(seedRanges, rows)
-    return [...locationRanges].reduce((a, b) => Math.min(a.start, b.start), Number.MAX_VALUE)
+    let minLocation = Number.MAX_SAFE_INTEGER
+    for (range of locationRanges) {
+        if (range.start < minLocation) {
+            minLocation = range.start
+        }
+    }
+    return minLocation
+    
+    // return [...locationRanges].reduce((a, b) => Math.min(a.start, b.start), { start: Number.MAX_SAFE_INTEGER, end: Number.MAX_SAFE_INTEGER }).start
 }
 
 function getLocationRanges(seedRanges, rows) {
     let index = 1
-    let ranges = {
-        before: seedRanges,
-        after: new Set()
-    }
+    let currentRanges = seedRanges
     while (index < rows.length) {
         if (rows[index].includes('map')) {
             index++
+            let ranges = {
+                before: currentRanges,
+                after: new Set()
+            }
             while (index < rows.length && rows[index].length > 1) {
                 const mapping = getMapping(rows[index])
                 ranges = transformRanges(mapping, ranges)
                 index++
             }
+            for (range of ranges.before) {
+                ranges.after.add(range)
+            }
+            currentRanges = ranges.after
         }
         index++
     }
-    for (range of ranges.before) {
-        ranges.after.add(range)
-    }
-    return ranges.after
+    return currentRanges
 }
 
 function transformRanges(mapping, ranges) {

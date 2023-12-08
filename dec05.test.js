@@ -389,7 +389,7 @@ describe('getNumbers', () => {
     })
 })
 
-test.skip('solutions', () => {
+test('solutions', () => {
     console.log('Part 1 answer: ')
     console.log('Part 2 answer: ' + getLowestLocationFromSeedRanges(FULL_INPUT))
 })
