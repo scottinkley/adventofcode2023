@@ -10,4 +10,9 @@ if a location in the queue already has a distance, replace that distance if is l
 May want to create a locations 2d array
 */
 
-module.exports = {}
+function getFarthestDistanceFromStart(input) {
+    // find the starting point
+    // from the starting point, conduct a breadth-first search
+}
+
+module.exports = { getFarthestDistanceFromStart }

@@ -2,6 +2,8 @@
 Day 9: Mirage Maintenance
 */
 
+const { getNumbers } = require('./util/string-manipulation')
+
 function getSumOfExtrapolatedValues(input, extraplation) {
     const rows = input.trim().split('\n')
     let sum = 0
@@ -63,10 +65,6 @@ function getIntervals(sequence) {
         intervals[index] = sequence[index + 1] - sequence[index]
     }
     return intervals
-}
-
-function getNumbers(string) {
-    return string.trim().split(' ').map(num => Number(num))
 }
 
 module.exports = { getSumOfExtrapolatedValues, getBackwardsExtrapolatedValue, getExtrapolatedValue, getIntervals }

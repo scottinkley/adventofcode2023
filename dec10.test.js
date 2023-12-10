@@ -2,7 +2,7 @@
 Day 10: Pipe Maze --- test
 */
 
-const {} = require('./dec10')
+const { getFarthestDistanceFromStart } = require('./dec10')
 
 const EXAMPLE =
 `7-F7-
@@ -153,7 +153,13 @@ J.J-7.J-FJ-L7J.---J7.LLJ|-L7FJ7LJJ.LF7F|F-JF-J7FF7..JFJ7|LLJ7|7LL7|JFJL---7LJ.LJ
 J-.F7J-J|L-|-FJ-F--7LLJ-J-.F7|F--JJFJF|L-L7F7.|.L-FJ|LL-7F|LF7.-JLL.7.||.|J|F--||LL7|J-F7.|-|7L7.||||J-|.-.|J||--F.--L||F7.J-J-J|LFLFF7.|.F|
 |-LFJJJLLJLJ.FJF--7J-.LJL-JLLL-L-F-7-|J.|LJJ.LFJJ-LLL.LLLJ|JLJ|-LL-FJLLJ-J7--LJLL-LJ.|LL-FJJLLLJ.L|JJLF|-J-JLJ-FJ.FJ.L|LLJL..LJFJL-FJJLJ--FJ`
 
-test('solutions', () => {
-    console.log('Part 1 answer: ')
+describe('getFarthestDistanceFromStart', () => {
+    test('provided example', () => {
+        expect(getFarthestDistanceFromStart(EXAMPLE)).toEqual(8)
+    })
+})
+
+test.skip('solutions', () => {
+    console.log('Part 1 answer: ' + getFarthestDistanceFromStart(FULL_INPUT))
     console.log('Part 2 answer: ')
 })

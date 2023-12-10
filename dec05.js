@@ -2,6 +2,8 @@
 Seeds
 */
 
+const { getNumbers } = require('./util/string-manipulation')
+
 function getLowestLocationFromSeedRanges(input) {
     const rows = input.trim().split('\n')
     const seedRanges = getSeedRanges(rows[0].trim().split(':')[1])
@@ -90,8 +92,4 @@ function getMapping(string) {
     }
 }
 
-function getNumbers(string) {
-    return string.trim().split(' ').map(str => Number(str))
-}
-
-module.exports = { getLowestLocationFromSeedRanges, transformRanges, getSeedRanges, getMapping, getNumbers }
+module.exports = { getLowestLocationFromSeedRanges, transformRanges, getSeedRanges, getMapping }

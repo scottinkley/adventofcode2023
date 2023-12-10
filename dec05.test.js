@@ -2,7 +2,7 @@
 test file
 */
 
-const { getLowestLocationFromSeedRanges, transformRanges, getSeedRanges, getMapping, getNumbers } = require('./dec05')
+const { getLowestLocationFromSeedRanges, transformRanges, getSeedRanges, getMapping } = require('./dec05')
 
 const EXAMPLE =
 `seeds: 79 14 55 13
@@ -380,12 +380,6 @@ describe('getMapping', () => {
         expect(getMapping('731512552 475754624 67823222')).toEqual({
             start: 475754624, end: 543577845, transform: 255757928
         })
-    })
-})
-
-describe('getNumbers', () => {
-    test('79 14 55 13', () => {
-        expect(getNumbers('79 14 55 13')).toEqual([79, 14, 55, 13])
     })
 })
 
