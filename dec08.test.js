@@ -2,10 +2,25 @@
 Day 8: Haunted Wasteland -- test
 */
 
-const {} = require('./dec08')
+const { getNumberOfSteps } = require('./dec08')
 
-const EXAMPLE =
-``
+const EXAMPLE_1 =
+`RL
+
+AAA = (BBB, CCC)
+BBB = (DDD, EEE)
+CCC = (ZZZ, GGG)
+DDD = (DDD, DDD)
+EEE = (EEE, EEE)
+GGG = (GGG, GGG)
+ZZZ = (ZZZ, ZZZ)`
+
+const EXAMPLE_2 =
+`LLR
+
+AAA = (BBB, BBB)
+BBB = (AAA, ZZZ)
+ZZZ = (ZZZ, ZZZ)`
 
 const FULL_INPUT =
 `LLLRLRLRLLRRRLRRRLRRRLLLRLRLLRRLLRRLRLRLLRLRLRRLLRRRLRLLRRLRRRLRRLLLRRRLRRRLRRRLLLLRRLRRRLRLRRRLRRLLRLRLRRRLRRRLRRLRRRLLLLLLRLRRRLLLLRLRRRLRRRLRLRRLRLRLRLRLRRRLLRRLRLRRLRRLRRLLRLLLRRLRLLRRLRLRRLRRRLRRLLRLRLRLRRLLRLLRRLLLRLRLRRRLRRLLRRRLRLRLRRLLRLRLRLRRLRLRLRRLRRLLRRLRRRLRRRLLLRRRR
@@ -757,7 +772,17 @@ QQP = (XJB, HSJ)
 MTB = (LMJ, PCP)
 FMJ = (KQM, DHQ)`
 
+describe('getNumberOfSteps', () => {
+    test('example 1', () => {
+        expect(getNumberOfSteps(EXAMPLE_1)).toEqual(2)
+    })
+
+    test('example 2', () => {
+        expect(getNumberOfSteps(EXAMPLE_2)).toEqual(6)
+    })
+})
+
 test('solutions', () => {
-    console.log('Part 1 answer: ')
+    console.log('Part 1 answer: ' + getNumberOfSteps(FULL_INPUT))
     console.log('Part 2 answer: ')
 })
