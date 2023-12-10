@@ -2,7 +2,7 @@
 Day 9: Mirage Maintenance -- tests
 */
 
-const { getSumOfExtrapolatedValues } = require('./dec09')
+const { getSumOfExtrapolatedValues, getExtrapolatedValue, getIntervals } = require('./dec09')
 
 const EXAMPLE =
 `0 3 6 9 12 15
@@ -228,6 +228,24 @@ describe('getExtrapolatedValue', () => {
 
     test('10 13 16 21 30 45', () => {
         expect(getExtrapolatedValue('10 13 16 21 30 45')).toEqual(68)
+    })
+})
+
+describe('getIntervals', () => {
+    test('0,3,6,9,12,15', () => {
+        expect(getIntervals([0,3,6,9,12,15])).toEqual([3,3,3,3,3])
+    })
+
+    test('3,3,3,3,3', () => {
+        expect(getIntervals([3,3,3,3,3])).toEqual([0,0,0,0])
+    })
+
+    test('10 13 16 21 30 45', () => {
+        expect(getIntervals([10, 13, 16, 21, 30, 45])).toEqual([3, 3, 5, 9, 15])
+    })
+
+    test('3, 3, 5, 9, 15', () => {
+        expect(getIntervals([3, 3, 5, 9, 15])).toEqual([0, 2, 4, 6])
     })
 })
 
