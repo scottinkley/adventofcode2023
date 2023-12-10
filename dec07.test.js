@@ -2,7 +2,7 @@
 Day 7: Camel Cards -- Tests
 */
 
-const {} = require('./dec07')
+const { calculateTotalWinnings, getHandStrength } = require('./dec07')
 
 const EXAMPLE =
 `32T3K 765
@@ -1013,7 +1013,47 @@ QQ222 899
 7K283 284
 23339 728`
 
+describe('calculateTotalWinnings', () => {
+    test('provided example', () => {
+        expect(calculateTotalWinnings(EXAMPLE)).toEqual(6440)
+    })
+})
+
+describe('getHandStrength', () => {
+    test('5-of-a-kind > 4-of-a-kind', () => {
+        expect(getHandStrength('22222')).toBeGreaterThan(getHandStrength('AAAAK'))
+    })
+
+    test('4-of-a-kind > full house', () => {
+        expect(getHandStrength('22322')).toBeGreaterThan(getHandStrength('33322'))
+    })
+
+    test('full house > 3-of-a-kind', () => {
+        expect(getHandStrength('JTJJT')).toBeGreaterThan(getHandStrength('QQQKA'))
+    })
+
+    test('3-of-a-kind > 2 pair', () => {
+        expect(getHandStrength('44784')).toBeGreaterThan(getHandStrength('KKQQJ'))
+    })
+
+    test('2 pair > 1 pair', () => {
+        expect(getHandStrength('23423')).toBeGreaterThan(getHandStrength('AAJT9'))
+    })
+
+    test('1 pair > high card', () => {
+        expect(getHandStrength('23452')).toBeGreaterThan(getHandStrength('AKQJT'))
+    })
+
+    test('33332 > 2AAAA', () => {
+        expect(getHandStrength('33332')).toBeGreaterThan(getHandStrength('2AAAA'))
+    })
+
+    test('77888 > 77788', () => {
+        expect(getHandStrength('77888')).toBeGreaterThan(getHandStrength('77788'))
+    })
+})
+
 test('solutions', () => {
-    console.log('Part 1 answer: ')
+    console.log('Part 1 answer: ' + calculateTotalWinnings(FULL_INPUT))
     console.log('Part 2 answer: ')
 })
