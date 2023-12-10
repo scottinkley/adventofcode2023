@@ -2,22 +2,46 @@
 Day 6: Wait For It
 */
 
-const {} = require('./dec06')
+const { getProductOfDurationCounts, getNumberOfRecordBreakingDurations } = require('./dec06')
 
 const EXAMPLE_RACES = [
-    { time: 7, distance: 9 },
-    { time: 15, distance: 40 },
-    { time: 30, distance: 200 }
+    { duration: 7, recordDistance: 9 },
+    { duration: 15, recordDistance: 40 },
+    { duration: 30, recordDistance: 200 }
 ]
 
+describe('getProductOfDurationCounts', () => {
+    test('provided example', () => {
+        expect(getProductOfDurationCounts(EXAMPLE_RACES)).toEqual(288)
+    })
+})
+
+describe('getNumberOfRecordBreakingDurations', () => {
+    test('7 and 9', () => {
+        expect(getNumberOfRecordBreakingDurations(EXAMPLE_RACES[0])).toEqual(4)
+    })
+
+    test('15 and 40', () => {
+        expect(getNumberOfRecordBreakingDurations(EXAMPLE_RACES[1])).toEqual(8)
+    })
+
+    test('30 and 200', () => {
+        expect(getNumberOfRecordBreakingDurations(EXAMPLE_RACES[2])).toEqual(9)
+    })
+})
+
+/*
+Solutions
+*/
+
 const RACES = [
-    { time: 45, distance: 295 },
-    { time: 98, distance: 1734 },
-    { time: 83, distance: 1278 },
-    { time: 73, distance: 1210 }
+    { duration: 45, recordDistance: 295 },
+    { duration: 98, recordDistance: 1734 },
+    { duration: 83, recordDistance: 1278 },
+    { duration: 73, recordDistance: 1210 }
 ]
 
 test('solutions', () => {
-    console.log('Part 1 answer: ')
+    console.log('Part 1 answer: ' + getProductOfDurationCounts(RACES))
     console.log('Part 2 answer: ')
 })
