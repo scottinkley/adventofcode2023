@@ -2,7 +2,7 @@
 Day 9: Mirage Maintenance -- tests
 */
 
-const { getSumOfExtrapolatedValues, getExtrapolatedValue, getIntervals } = require('./dec09')
+const { getSumOfExtrapolatedValues, getBackwardsExtrapolatedValue, getExtrapolatedValue, getIntervals } = require('./dec09')
 
 const EXAMPLE =
 `0 3 6 9 12 15
@@ -213,7 +213,11 @@ const FULL_INPUT =
 
 describe('getSumOfExtrapolatedValues', () => {
     test('provided example', () => {
-       expect(getSumOfExtrapolatedValues(EXAMPLE)).toEqual(114) 
+       expect(getSumOfExtrapolatedValues(EXAMPLE, getExtrapolatedValue)).toEqual(114) 
+    })
+
+    test('provided example -- backwards', () => {
+       expect(getSumOfExtrapolatedValues(EXAMPLE, getBackwardsExtrapolatedValue)).toEqual(2) 
     })
 })
 
@@ -228,6 +232,20 @@ describe('getExtrapolatedValue', () => {
 
     test('10 13 16 21 30 45', () => {
         expect(getExtrapolatedValue('10 13 16 21 30 45')).toEqual(68)
+    })
+})
+
+describe('getBackwardsExtrapolatedValue', () => {
+    test('0 3 6 9 12 15', () => {
+        expect(getBackwardsExtrapolatedValue('0 3 6 9 12 15')).toEqual(-3)
+    })
+
+    test('1 3 6 10 15 21', () => {
+        expect(getBackwardsExtrapolatedValue('1 3 6 10 15 21')).toEqual(0)
+    })
+
+    test('10 13 16 21 30 45', () => {
+        expect(getBackwardsExtrapolatedValue('10 13 16 21 30 45')).toEqual(5)
     })
 })
 
@@ -250,6 +268,6 @@ describe('getIntervals', () => {
 })
 
 test('solutions', () => {
-    console.log('Part 1 answer: ' + getSumOfExtrapolatedValues(FULL_INPUT))
-    console.log('Part 2 answer: ')
+    console.log('Part 1 answer: ' + getSumOfExtrapolatedValues(FULL_INPUT, getExtrapolatedValue))
+    console.log('Part 2 answer: ' + getSumOfExtrapolatedValues(FULL_INPUT, getBackwardsExtrapolatedValue))
 })

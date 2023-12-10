@@ -2,24 +2,28 @@
 Day 9: Mirage Maintenance
 */
 
-function getSumOfExtrapolatedValues(input) {
+function getSumOfExtrapolatedValues(input, extraplation) {
     const rows = input.trim().split('\n')
     let sum = 0
     for (row of rows) {
-        sum += getExtrapolatedValue(row)
+        sum += extraplation(row)
     }
     return sum
 }
 
-function getExtrapolatedValue(string) {
-    const sequences = new Array()
-    let last = getNumbers(string)
-    sequences.push(last)
+function getBackwardsExtrapolatedValue(string) {
+    const sequences = generateSequences(string)
 
-    while (!isAllZeros(last)) {
-        last = getIntervals(last)
-        sequences.push(last)
+    const length = sequences.length
+    let extrapolatedValue = 0
+    for (let index = length - 1; index >= 0; index--) {
+        extrapolatedValue = sequences[index][0] - extrapolatedValue
     }
+    return extrapolatedValue
+}
+
+function getExtrapolatedValue(string) {
+    const sequences = generateSequences(string)
 
     const length = sequences.length
     let currLastIndex = sequences[0].length - length
@@ -29,6 +33,18 @@ function getExtrapolatedValue(string) {
         currLastIndex++
     }
     return extrapolatedValue
+}
+
+function generateSequences(string) {
+    const sequences = new Array()
+    let last = getNumbers(string)
+    sequences.push(last)
+
+    while (!isAllZeros(last)) {
+        last = getIntervals(last)
+        sequences.push(last)
+    }
+    return sequences
 }
 
 function isAllZeros(sequence) {
@@ -53,4 +69,4 @@ function getNumbers(string) {
     return string.trim().split(' ').map(num => Number(num))
 }
 
-module.exports = { getSumOfExtrapolatedValues, getExtrapolatedValue, getIntervals }
+module.exports = { getSumOfExtrapolatedValues, getBackwardsExtrapolatedValue, getExtrapolatedValue, getIntervals }
