@@ -10,6 +10,8 @@ const EXAMPLE_RACES = [
     { duration: 30, recordDistance: 200 }
 ]
 
+const EXAMPLE_RACE = { duration: 71530, recordDistance: 940200 }
+
 describe('getProductOfDurationCounts', () => {
     test('provided example', () => {
         expect(getProductOfDurationCounts(EXAMPLE_RACES)).toEqual(288)
@@ -28,6 +30,10 @@ describe('getNumberOfRecordBreakingDurations', () => {
     test('30 and 200', () => {
         expect(getNumberOfRecordBreakingDurations(EXAMPLE_RACES[2])).toEqual(9)
     })
+
+    test('provided long example', () => {
+        expect(getNumberOfRecordBreakingDurations(EXAMPLE_RACE)).toEqual(71503)
+    })
 })
 
 /*
@@ -41,7 +47,9 @@ const RACES = [
     { duration: 73, recordDistance: 1210 }
 ]
 
+const RACE = { duration: 45988373, recordDistance: 295173412781210 }
+
 test('solutions', () => {
     console.log('Part 1 answer: ' + getProductOfDurationCounts(RACES))
-    console.log('Part 2 answer: ')
+    console.log('Part 2 answer: ' + getNumberOfRecordBreakingDurations(RACE))
 })
