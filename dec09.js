@@ -6,4 +6,8 @@ function getSumOfExtrapolatedValues(input) {
     
 }
 
-module.exports = { getSumOfExtrapolatedValues }
+function getExtrapolatedValue(string) {
+
+}
+
+module.exports = { getSumOfExtrapolatedValues, getExtrapolatedValue }

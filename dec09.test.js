@@ -217,6 +217,20 @@ describe('getSumOfExtrapolatedValues', () => {
     })
 })
 
+describe('getExtrapolatedValue', () => {
+    test('0 3 6 9 12 15', () => {
+        expect(getExtrapolatedValue('0 3 6 9 12 15')).toEqual(18)
+    })
+
+    test('1 3 6 10 15 21', () => {
+        expect(getExtrapolatedValue('1 3 6 10 15 21')).toEqual(28)
+    })
+
+    test('10 13 16 21 30 45', () => {
+        expect(getExtrapolatedValue('10 13 16 21 30 45')).toEqual(68)
+    })
+})
+
 test('solutions', () => {
     console.log('Part 1 answer: ' + getSumOfExtrapolatedValues(FULL_INPUT))
     console.log('Part 2 answer: ')
