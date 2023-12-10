@@ -2,7 +2,7 @@
 Day 8: Haunted Wasteland -- test
 */
 
-const { getNumberOfSteps } = require('./dec08')
+const { getNumberOfSteps, greatestCommonFactor } = require('./dec08')
 
 const EXAMPLE_1 =
 `RL
@@ -21,6 +21,18 @@ const EXAMPLE_2 =
 AAA = (BBB, BBB)
 BBB = (AAA, ZZZ)
 ZZZ = (ZZZ, ZZZ)`
+
+const EXAMPLE_3 =
+`LR
+
+11A = (11B, XXX)
+11B = (XXX, 11Z)
+11Z = (11B, XXX)
+22A = (22B, XXX)
+22B = (22C, 22C)
+22C = (22Z, 22Z)
+22Z = (22B, 22B)
+XXX = (XXX, XXX)`
 
 const FULL_INPUT =
 `LLLRLRLRLLRRRLRRRLRRRLLLRLRLLRRLLRRLRLRLLRLRLRRLLRRRLRLLRRLRRRLRRLLLRRRLRRRLRRRLLLLRRLRRRLRLRRRLRRLLRLRLRRRLRRRLRRLRRRLLLLLLRLRRRLLLLRLRRRLRRRLRLRRLRLRLRLRLRRRLLRRLRLRRLRRLRRLLRLLLRRLRLLRRLRLRRLRRRLRRLLRLRLRLRRLLRLLRRLLLRLRLRRRLRRLLRRRLRLRLRRLLRLRLRLRRLRLRLRRLRRLLRRLRRRLRRRLLLRRRR
@@ -780,9 +792,22 @@ describe('getNumberOfSteps', () => {
     test('example 2', () => {
         expect(getNumberOfSteps(EXAMPLE_2)).toEqual(6)
     })
+
+    test('example 3', () => {
+        expect(getNumberOfSteps(EXAMPLE_3)).toEqual(6)
+    })
+})
+
+describe('greatest common factor', () => {
+    test('20513,18827', () => {
+        expect(greatestCommonFactor(20513,18827)).toEqual(281)
+    })
+
+    test('18827,20513', () => {
+        expect(greatestCommonFactor(18827,20513)).toEqual(281)
+    })
 })
 
 test('solutions', () => {
-    console.log('Part 1 answer: ' + getNumberOfSteps(FULL_INPUT))
-    console.log('Part 2 answer: ')
+    console.log('Part 2 answer: ' + getNumberOfSteps(FULL_INPUT))
 })
