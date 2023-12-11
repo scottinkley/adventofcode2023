@@ -1,3 +1,5 @@
+const { NoSuchElementError } = require('./errors')
+
 class LinkedList {
     #first = null
     #last = null
@@ -62,11 +64,4 @@ class Node {
     }
 }
 
-class NoSuchElementError extends Error {
-    constructor(message) {
-        super(message)
-        this.name = "NoSuchElementError"
-    }
-}
-
-module.exports = { LinkedList, NoSuchElementError }
+module.exports = { LinkedList }

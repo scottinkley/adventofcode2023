@@ -1,4 +1,5 @@
-const { LinkedList, NoSuchElementError } = require('./linked-list')
+const { LinkedList } = require('./linked-list')
+const { NoSuchElementError } = require('./errors')
 
 describe('LinkedList', () => {
     describe('addFirst()', () => {
@@ -38,36 +39,21 @@ describe('LinkedList', () => {
     describe('first()', () => {
         test('empty list', () => {
             const list = new LinkedList()
-            try {
-                list.first
-            } catch(error) {
-                expect(error instanceof NoSuchElementError).toBe(true)
-                expect(error.message).toEqual('Cannot get first element of list -- list is empty')
-            } 
+            expect(() => list.first).toThrow(NoSuchElementError)
         })
     })
 
     describe('last()', () => {
         test('empty list', () => {
             const list = new LinkedList()
-            try {
-                list.last
-            } catch(error) {
-                expect(error instanceof NoSuchElementError).toBe(true)
-                expect(error.message).toEqual('Cannot get last element of list -- list is empty')
-            }
+            expect(() => list.last).toThrow(NoSuchElementError)
         })
     })
 
     describe('removeFirst()', () => {
         test('empty list', () => {
             const list = new LinkedList()
-            try {
-                list.removeFirst()
-            } catch(error) {
-                expect(error instanceof NoSuchElementError).toBe(true)
-                expect(error.message).toEqual('Cannot remove first element -- list is empty')
-            }
+            expect(() => list.removeFirst()).toThrow(NoSuchElementError)
         })
 
         test('list has one node', () => {
