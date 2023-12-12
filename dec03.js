@@ -1,10 +1,12 @@
 /*
 Gear ratios
 */
+const { getRows } = require('./util/string-manipulation')
+
 function getSumOfGearRatios(input) {
     const GEARS = new Map()
 
-    const ROWS = input.trim().split('\n')
+    const ROWS = getRows(input)
     for (let rowIndex = 0; rowIndex < ROWS.length; rowIndex++) {
         const currentRow = ROWS[rowIndex].trim()
         let columnIndex = 0
@@ -71,7 +73,7 @@ Part numbers
 
 function getSumOfPartNumbers(input) {
     let sum = 0
-    const ROWS = input.trim().split('\n')
+    const ROWS = getRows(input)
     for (let rowIndex = 0; rowIndex < ROWS.length; rowIndex++) {
         const currentRow = ROWS[rowIndex].trim()
         let columnIndex = 0

@@ -1,6 +1,7 @@
 /*
 Day 7: Camel Cards -- part 2
 */
+const { getRows } = require('./util/string-manipulation')
 
 function calculateTotalWinnings(setOfHands) {
     const convertToObject = (string) => {
@@ -10,7 +11,7 @@ function calculateTotalWinnings(setOfHands) {
             bid: Number(arr[1])
         }
     }
-    const hands = setOfHands.trim().split('\n')
+    const hands = getRows(setOfHands)
     .map(convertToObject)
     .sort((a, b) => a.strength - b.strength)
 

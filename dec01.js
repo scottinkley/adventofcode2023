@@ -1,6 +1,7 @@
 /*
 Trebuchet
 */
+const { getRows } = require('./util/string-manipulation')
 
 const DIGITS = {
     'one': 1,
@@ -17,7 +18,7 @@ const DIGITS = {
 
 function getSumOfCalibrationValues(document) {
     let sum = 0
-    const lines = document.split('\n')
+    const lines = getRows(document)
     for (line of lines) {
         calVal = getCalibrationValueOf(line)
         sum += calVal

@@ -2,10 +2,10 @@
 Seeds
 */
 
-const { getNumbers } = require('./util/string-manipulation')
+const { getNumbers, getRows } = require('./util/string-manipulation')
 
 function getLowestLocationFromSeedRanges(input) {
-    const rows = input.trim().split('\n')
+    const rows = getRows(input)
     const seedRanges = getSeedRanges(rows[0].trim().split(':')[1])
     const locationRanges = getLocationRanges(seedRanges, rows)
     return getLowestStartInRanges(locationRanges)

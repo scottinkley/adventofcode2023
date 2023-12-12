@@ -2,10 +2,10 @@
 Day 9: Mirage Maintenance
 */
 
-const { getNumbers } = require('./util/string-manipulation')
+const { getNumbers, getRows } = require('./util/string-manipulation')
 
 function getSumOfExtrapolatedValues(input, extraplation) {
-    const rows = input.trim().split('\n')
+    const rows = getRows(input)
     let sum = 0
     for (row of rows) {
         sum += extraplation(row)

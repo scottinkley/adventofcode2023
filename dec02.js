@@ -1,12 +1,13 @@
 /*
 Day 2: Cube Conundrum
 */
+const { getRows } = require('./util/string-manipulation')
 
 const MAX = { 'red': 12, 'green': 13, 'blue': 14 }
 
 function sumOfPossibleGames(games) {
     let sum = 0
-    for (game of games.trim(' ').split('\n')) {
+    for (game of getRows(games)) {
         const gameInfo = game.trim(' ').split(':')
         const gameNumber = Number(gameInfo[0].split(' ')[1])
         const rounds = gameInfo[1]
@@ -19,7 +20,7 @@ function sumOfPossibleGames(games) {
 
 function sumOfPowers(games) {
     let sum = 0
-    for (game of games.trim(' ').split('\n')) {
+    for (game of getRows(games)) {
         const gameInfo = game.trim(' ').split(':')
         const rounds = gameInfo[1]
         sum += powerOfGame(rounds)

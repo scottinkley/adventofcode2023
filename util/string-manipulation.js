@@ -2,4 +2,8 @@ function getNumbers(string) {
     return string.trim().split(' ').map(str => Number(str))
 }
 
-module.exports = { getNumbers }
+function getRows(input) {
+    return input.trim().split('\n')
+}
+
+module.exports = { getNumbers, getRows }

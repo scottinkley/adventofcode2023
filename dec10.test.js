@@ -2,7 +2,8 @@
 Day 10: Pipe Maze --- test
 */
 
-const { getFarthestDistanceFromStart, getStartingPosition, getRows } = require('./dec10')
+const { getFarthestDistanceFromStart, getStartingPosition } = require('./dec10')
+const { getRows } = require('./util/string-manipulation')
 const { NoSuchElementError } = require('./util/errors')
 
 const EXAMPLE =

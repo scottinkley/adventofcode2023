@@ -1,11 +1,12 @@
 /*
 Scratchcards
 */
+const { getRows } = require('./util/string-manipulation')
 
 function getNumberOfScratchcards(input) {
     let totalNumber = 0
     const COPIES = new Map()
-    const CARDS = input.trim().split('\n')
+    const CARDS = getRows(input)
     let currIndex = 0
     while (currIndex < CARDS.length) {
         let thisCount = 1
@@ -27,7 +28,7 @@ function getNumberOfScratchcards(input) {
 
 function getSumOfCardScores(cards) {
     let sum = 0
-    for (card of cards.trim().split('\n')) {
+    for (card of getRows(cards)) {
         sum += getScoreOf(card)
     }
     return sum

@@ -1,9 +1,10 @@
 /*
 Day 8: Haunted Wasteland
 */
+const { getRows } = require('./util/string-manipulation')
 
 function getNumberOfSteps(input) {
-    const rows = input.trim().split('\n')
+    const rows = getRows(input)
     const instructions = rows[0]
     let nodes = new Map()
     const keys = []
