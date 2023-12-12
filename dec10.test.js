@@ -2,7 +2,7 @@
 Day 10: Pipe Maze --- test
 */
 
-const { getFarthestDistanceFromStart } = require('./dec10')
+const { getFarthestDistanceFromStart, getStartingPosition, getRows } = require('./dec10')
 
 const EXAMPLE =
 `7-F7-
@@ -156,6 +156,12 @@ J-.F7J-J|L-|-FJ-F--7LLJ-J-.F7|F--JJFJF|L-L7F7.|.L-FJ|LL-7F|LF7.-JLL.7.||.|J|F--|
 describe('getFarthestDistanceFromStart', () => {
     test('provided example', () => {
         expect(getFarthestDistanceFromStart(EXAMPLE)).toEqual(8)
+    })
+})
+
+describe('getStartingPosition', () => {
+    test('provided example', () => {
+        expect(getStartingPosition(getRows(EXAMPLE))).toEqual([2,0])
     })
 })
 

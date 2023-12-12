@@ -39,7 +39,7 @@ describe('LinkedList', () => {
         const addedValue = 8
         beforeEach(() => {
             list = new LinkedList()
-            list.addFirst(addedValue)
+            list.prepend(addedValue)
         })
 
         it('should return that element as the first element', () => {
@@ -60,7 +60,7 @@ describe('LinkedList', () => {
         const addedValue = 2
         beforeEach(() => {
             list = new LinkedList()
-            list.addLast(addedValue)
+            list.append(addedValue)
         })
 
         it('should return that element as the first element', () => {
@@ -81,13 +81,13 @@ describe('LinkedList', () => {
         const originalValue = 5
         beforeEach(() => {
             list = new LinkedList()
-            list.addFirst(originalValue)
+            list.prepend(originalValue)
         })
 
         describe('element is added first', () => {
             const newValueAdded = 23
             beforeEach(() => {
-                list.addFirst(newValueAdded)
+                list.prepend(newValueAdded)
             })
 
             it('should return the new value as first', () => {
@@ -102,7 +102,7 @@ describe('LinkedList', () => {
         describe('element is added last', () => {
             const newValueAdded = 16
             beforeEach(() => {
-                list.addLast(newValueAdded)
+                list.append(newValueAdded)
             })
 
             it('should return the new value as last', () => {
@@ -145,9 +145,9 @@ describe('LinkedList', () => {
         const thirdValue = 18
         beforeEach(() => {
             list = new LinkedList()
-            list.addFirst(thirdValue)
-            list.addFirst(secondValue)
-            list.addFirst(firstValue)
+            list.prepend(thirdValue)
+            list.prepend(secondValue)
+            list.prepend(firstValue)
         })
 
         it('should have a size of 3', () => {
@@ -174,17 +174,17 @@ describe('LinkedList', () => {
         expect(() => list.first).toThrow(NoSuchElementError)
         expect(() => list.last).toThrow(NoSuchElementError)
 
-        list.addFirst(3)
+        list.prepend(3)
         expect(list.first).toEqual(3)
         expect(list.last).toEqual(3)
         expect(list.size).toEqual(1)
 
-        list.addLast(7)
+        list.append(7)
         expect(list.first).toEqual(3)
         expect(list.last).toEqual(7)
         expect(list.size).toEqual(2)
 
-        list.addFirst(9)
+        list.prepend(9)
         expect(list.first).toEqual(9)
         expect(list.last).toEqual(7)
         expect(list.size).toEqual(3)

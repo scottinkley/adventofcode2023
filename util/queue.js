@@ -8,7 +8,7 @@ class Queue {
     }
 
     enqueue(value) {
-        this.#list.addLast(value)
+        this.#list.append(value)
     }
 
     dequeue() {

@@ -5,7 +5,7 @@ class LinkedList {
     #last = null
     #size = 0
 
-    addFirst(value) {
+    prepend(value) {
         this.#first = new Node(this.#first, value)
         if (this.#last === null) {
             this.#last = this.#first
@@ -13,7 +13,7 @@ class LinkedList {
         this.#size++
     }
 
-    addLast(value) {
+    append(value) {
         const temp = this.#last
         this.#last = new Node(null, value)
         if (temp !== null) {

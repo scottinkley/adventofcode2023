@@ -15,4 +15,21 @@ function getFarthestDistanceFromStart(input) {
     // from the starting point, conduct a breadth-first search
 }
 
-module.exports = { getFarthestDistanceFromStart }
+function getStartingPosition(rows) {
+    const numberOfRows = rows.length
+    const numberOfColumns = rows[0].length
+    for (let row = 0; row < numberOfRows; row++) {
+        const currentRow = rows[row]
+        for (let column = 0; column < numberOfColumns; column++) {
+            if (currentRow.charAt(column) === 'S') {
+                return [row, column]
+            }
+        }
+    }
+}
+
+function getRows(input) {
+    return input.trim().split('\n')
+}
+
+module.exports = { getFarthestDistanceFromStart, getStartingPosition, getRows }
