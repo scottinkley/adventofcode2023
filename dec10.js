@@ -10,6 +10,8 @@ if a location in the queue already has a distance, replace that distance if is l
 May want to create a locations 2d array
 */
 
+const { NoSuchElementError } = require('./util/errors')
+
 function getFarthestDistanceFromStart(input) {
     // find the starting point
     // from the starting point, conduct a breadth-first search
@@ -26,6 +28,7 @@ function getStartingPosition(rows) {
             }
         }
     }
+    throw new NoSuchElementError('Did not find starting position character')
 }
 
 function getRows(input) {

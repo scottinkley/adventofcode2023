@@ -3,11 +3,19 @@ Day 10: Pipe Maze --- test
 */
 
 const { getFarthestDistanceFromStart, getStartingPosition, getRows } = require('./dec10')
+const { NoSuchElementError } = require('./util/errors')
 
 const EXAMPLE =
 `7-F7-
 .FJ|7
 SJLL7
+|F--J
+LJ.LJ`
+
+const NO_STARTING_POSITION =
+`7-F7-
+.FJ|7
+-JLL7
 |F--J
 LJ.LJ`
 
@@ -162,6 +170,10 @@ describe('getFarthestDistanceFromStart', () => {
 describe('getStartingPosition', () => {
     test('provided example', () => {
         expect(getStartingPosition(getRows(EXAMPLE))).toEqual([2,0])
+    })
+
+    test('No starting position exists', () => {
+        expect(() => getStartingPosition(getRows(NO_STARTING_POSITION))).toThrow(NoSuchElementError)
     })
 })
 
