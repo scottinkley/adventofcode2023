@@ -2,9 +2,10 @@
 Day 10: Pipe Maze --- test
 */
 
-const { getFarthestDistanceFromStart, getStartingPosition } = require('./dec10')
+const { getFarthestDistanceFromStart, getStartingPosition, getPositionInDirection,
+    getPositionsThatConnectTo, getSymbol, areOpposites, Directions } = require('./dec10')
 const { getRows } = require('./util/string-manipulation')
-const { NoSuchElementError } = require('./util/errors')
+const { IndexOutOfBoundsError, NoSuchElementError } = require('./util/errors')
 
 const EXAMPLE =
 `7-F7-
@@ -19,6 +20,13 @@ const NO_STARTING_POSITION =
 -JLL7
 |F--J
 LJ.LJ`
+
+const START_NOT_ON_EDGE =
+`-L|F7
+7S-7|
+L|7||
+-L-J|
+L|-JF`
 
 const FULL_INPUT =
 `FJ7.FF--|--|-|J.FL7FL7LJ7F7-F.-7.FF7F|F-JJ-F----JF77.-JJFJ--|7FF7L-7.--LF.FJ-FL7JFF-77|F----F-|-F77LJ---F-L-L-77-.FJ.F77FJF7.LFJ7-|.FF-7--7.
@@ -178,7 +186,96 @@ describe('getStartingPosition', () => {
     })
 })
 
-test.skip('solutions', () => {
+describe('getPositionsThatConnectTo', () => {
+    test('2,3', () => {
+        const actualPositions = getPositionsThatConnectTo([2,3], getRows(EXAMPLE))
+        const expectedPositions = new Set([[1,3],[2,4]])
+        expect(actualPositions).toEqual(expectedPositions)
+    })
+
+    test('0,0', () => {
+        const actualPositions = getPositionsThatConnectTo([0,0], getRows(EXAMPLE))
+        const expectedPositions = new Set()
+        expect(actualPositions).toEqual(expectedPositions)
+    })
+
+    test('4,1', () => {
+        const actualPositions = getPositionsThatConnectTo([4,1], getRows(EXAMPLE))
+        const expectedPositions = new Set([[4,0],[3,1]])
+        expect(actualPositions).toEqual(expectedPositions)
+    })
+
+    test('1,3', () => {
+        const actualPositions = getPositionsThatConnectTo([1,3], getRows(EXAMPLE))
+        const expectedPositions = new Set([[0,3],[2,3]])
+        expect(actualPositions).toEqual(expectedPositions)
+    })
+
+    test('start from example', () => {
+        const actualPositions = getPositionsThatConnectTo([2,0], getRows(EXAMPLE))
+        const expectedPositions = new Set([[3,0],[2,1]])
+        expect(actualPositions).toEqual(expectedPositions)
+    })
+
+    test('start not on edge', () => {
+        const actualPositions = getPositionsThatConnectTo([1,1], getRows(START_NOT_ON_EDGE))
+        const expectedPositions = new Set([[1,2],[2,1]])
+        expect(actualPositions).toEqual(expectedPositions)
+    })
+})
+
+describe('getSymbol', () => {
+    test('1,4', () => {
+        expect(getSymbol([1,4], getRows(EXAMPLE))).toEqual('7')
+    })
+
+    test('3,0', () => {
+        expect(getSymbol([3,1], getRows(EXAMPLE))).toEqual('F')
+    })
+
+    test('6,1', () => {
+        expect(() => getSymbol([6,1], getRows(EXAMPLE))).toThrow(IndexOutOfBoundsError)
+    })
+
+    test('1,6', () => {
+        expect(() => getSymbol([1,6], getRows(EXAMPLE))).toThrow(IndexOutOfBoundsError)
+    })
+})
+
+describe('getPositionInDirection', () => {
+    test('1,4 - north', () => {
+        expect(getPositionInDirection([1,4], Directions.NORTH)).toEqual([0,4])
+    })
+
+    test('1,4 - south', () => {
+        expect(getPositionInDirection([1,4], Directions.SOUTH)).toEqual([2,4])
+    })
+
+    test('1,4 - east', () => {
+        expect(getPositionInDirection([1,4], Directions.EAST)).toEqual([1,5])
+    })
+
+    test('1,4 - west', () => {
+        expect(getPositionInDirection([1,4], Directions.WEST)).toEqual([1,3])
+    })
+})
+
+describe('areOpposites', () => {
+    test('North and south are opposites', () => {
+        expect(areOpposites(Directions.NORTH, Directions.SOUTH)).toBe(true)
+    })
+
+    test('North and east are not opposites', () => {
+        expect(areOpposites(Directions.NORTH, Directions.EAST)).toBe(false)
+    })
+
+    test('West and east are opposites', () => {
+        expect(areOpposites(Directions.WEST, Directions.EAST)).toBe(true)
+    })
+})
+
+test('solutions', () => {
+    console.log(`Full input number of rows: ${getRows(FULL_INPUT).length}`)
     console.log('Part 1 answer: ' + getFarthestDistanceFromStart(FULL_INPUT))
     console.log('Part 2 answer: ')
 })
