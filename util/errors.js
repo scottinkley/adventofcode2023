@@ -1,3 +1,10 @@
+class IndexOutOfBoundsError extends Error {
+    constructor(message) {
+        super(message)
+        this.name = "IndexOutOfBoundsError"
+    }
+}
+
 class NoSuchElementError extends Error {
     constructor(message) {
         super(message)
@@ -5,4 +12,4 @@ class NoSuchElementError extends Error {
     }
 }
 
-module.exports = { NoSuchElementError }
+module.exports = { IndexOutOfBoundsError, NoSuchElementError }
